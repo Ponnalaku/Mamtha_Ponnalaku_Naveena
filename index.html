@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Skin Cancer Detection</title>
+
+    <style>
+        body{
+            background: url("/static/background.png") no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial;
+            color: #FFFFFF;
+        }
+
+        .box{
+            background: rgba(0,0,0,0.7);
+            width: 400px;
+            padding: 30px;
+            margin: 100px auto;
+            border-radius: 10px;
+            text-align: center;
+        }
+
+        h1{
+            color: #00E5FF;
+            font-size: 32px;
+        }
+
+        input{
+            margin: 10px;
+        }
+
+        button{
+            padding: 10px 20px;
+            background: #00E5FF;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        img{
+            width: 200px;
+            margin-top: 15px;
+        }
+
+        .result{
+            font-size: 22px;
+            color: #FFD700;
+            margin-top: 15px;
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="box">
+
+    <h1>Skin Cancer Detection</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <input type="file" name="file" required><br>
+        <button type="submit">Predict</button>
+    </form>
+
+    {% if prediction %}
+
+    <div class="result">
+        Prediction: {{ prediction }}
+    </div>
+
+    <div class="result">
+        Confidence: {{ (confidence*100)|round(2) }} %
+    </div>
+
+    <img src="{{ image_path }}">
+
+    {% endif %}
+
+
+</div>
+
+</body>
+</html>
