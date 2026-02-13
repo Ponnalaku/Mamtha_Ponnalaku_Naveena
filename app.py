@@ -10,8 +10,12 @@ app = Flask(__name__)
 
 def download_model(file_id, output):
     if not os.path.exists(output):
+        print("Downloading model...")
         url = f"https://drive.google.com/uc?id={file_id}"
         gdown.download(url, output, quiet=False)
+    else:
+        print("Model already exists.")
+
 
 
 # Download models if not present
@@ -75,4 +79,5 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
 
