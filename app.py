@@ -16,14 +16,11 @@ def download_model(file_id, output):
 
 # Download models if not present
 download_model("1JW0Kr9tsI9yLgsmQzc4sAirvRskX7Fu5", "cnn_model.keras")
-download_model("1TXBL7d0-ZFridk72MBXc1Zc3RBpD50Js", "densenet_model.keras")
-download_model("1tUINXlaupb7XLj80UxLaRo548oUbvyPL", "resnet_model.keras")
+
 
 
 # Load models
 cnn = load_model("cnn_model.keras")
-resnet = load_model("resnet_model.keras")
-densenet = load_model("densenet_model.keras")
 
 classes = ["akiec", "bcc", "melanoma"]
 
@@ -40,14 +37,11 @@ def preprocess(img_path):
 
 
 def ensemble_predict(img):
-    p1 = cnn.predict(img)
-    p2 = resnet.predict(img)
-    p3 = densenet.predict(img)
+    pred = cnn.predict(img)
 
-    final_prob = (p1 + p2 + p3) / 3
 
-    idx = np.argmax(final_prob)
-    conf = np.max(final_prob)
+    idx = np.argmax(pred)
+    conf = np.max(pred)
 
     return classes[idx], conf
 
@@ -81,3 +75,4 @@ def home():
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=10000)
+
